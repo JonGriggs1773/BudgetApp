@@ -1,0 +1,12 @@
+
+body {
+    background-image: url(/static/images/coins.jpg);
+}
+
+* {
+    color: black;
+    text-shadow:    -1px 1px 2px whitesmoke,
+				    1px 2px 6px gray,
+				    1px -1px 0 gray,
+				    -1px -1px 0 gray;
+} 

@@ -1,0 +1,18 @@
+
+/*! select new background image */
+body {
+    min-height: 100%;
+    background-image: url(/static/images/.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+
+* {
+    color: black;
+    text-shadow:    -1px 1px 2px whitesmoke,
+				    1px 2px 6px whitesmoke,
+				    1px -1px 0 whitesmoke,
+				    -1px -1px 0 whitesmoke;
+} 
+

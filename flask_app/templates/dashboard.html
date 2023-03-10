@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+        <link rel = "stylesheet" href = "static/css/dashboard.css">
+        <title>Budget Dashboard</title>
+    </head>
+    <body>
+        <nav class = "navbar navbar-expand-lg bg-dark">
+            <div class = "container-fluid">
+                <h1 class = "text-info">Budget Miracle</h1>
+            </div>
+            <a href = "/learn" class = "btn btn-success me-3">Learn</a>
+            <a class = "btn btn-light me-3" href = "/logout">Logout</a>
+        </nav>
+        <div class = "container">
+            <div class="row">
+                <div class="col-3 m-4">
+                    <h4 class = "alert alert-info">50% of your income is ${{ fifty_percent }}.00</h4>
+                </div>
+                <div class="col-3 m-4">
+                    <h4 class = "alert alert-info">30% of your income is ${{ thirty_percent }}.00</h4>
+                </div>
+                <div class="col-3 m-4">
+                    <h4 class = "alert alert-info">20% of your income is ${{ twenty_percent }}.00</h4>
+                </div>
+            </div>
+                <div class="col-10">
+                    <div class = "alert alert-primary mt-4">
+                        <h5>Total Monthly Income: ${{ income.amount }}.00</h5>
+                    </div>
+                    {% if income_after_expenses <= 0 %}
+                    <div class = "alert alert-danger">
+                        <h5>After all bills, expenses, and savings: ${{ income_after_expenses }}.00</h5>
+                    </div>
+                    {% else %}
+                        <div class = "alert alert-success">
+                            <h5>After all bills, expenses, and savings: ${{ income_after_expenses }}.00</h5>
+                        </div>
+                    {% endif %}
+                    <div class = "d-flex align-items-center pt-4">
+                        <h4>Bills</h2>
+                        <a href = "/add/bill" class = "btn btn-info ms-auto">Add Bill</a>
+                    </div>
+                    <table class = "table">
+                        <thead>
+                            <tr>
+                                <th scope = "col">Name</th>
+                                <th scope = "col">Amount</th>
+                                <th scope = "col" class = "text text-warning">Bill Total: {{ bill_total }}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% if user_with_bills.bills %}
+                                {% for bill in user_with_bills.bills %}
+                                    <tr>
+                                        <td scope = "row">{{ bill.name }}</td>
+                                        <td>{{ bill.amount }}</td>
+                                        <td><a href="/edit/bills/{{ bill.id }}" class = "text text-success-emphasis">Edit</a></td>
+                                        <td><a href="/delete/bill/{{ bill.id }}" class = "text text-danger">Delete</a></td>
+                                    </tr>
+                                {% endfor %}
+                            {% endif %}
+                        </tbody>
+                    </table>
+                        
+                    <div class = "d-flex align-items-center pt-4">
+                        <h4>Expenses</h2>
+                        <a href = "/add/expense" class = "btn btn-info ms-auto">Add Expense</a>
+                    </div>
+                    <table class = "table">
+                        <thead>
+                            <tr>
+                                <th scope = "col">Name</th>
+                                <th scope = "col">Amount</th>
+                                <th scope = "col" class = "text text-warning">Expense Total: {{ expense_total }}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% if user_with_expenses.expenses %}
+                                {% for expense in user_with_expenses.expenses %}
+                                    <tr>
+                                        <td scope = "row">{{ expense.name }}</td>
+                                        <td>{{ expense.amount }}</td>
+                                        <td><a href="/edit/expenses/{{ expense.id }}" class = "text text-success-emphasis">Edit</a></td>
+                                        <td><a href="/delete/expense/{{ expense.id }}" class = "text text-danger">Delete</a></td>
+                                    </tr>
+                                {% endfor %}
+                            {% endif %}
+                        </tbody>
+                    </table>
+                        
+                    <div class = "d-flex align-items-center pt-4">
+                        <h4>Savings</h2>
+                            <a href = "/add/saving" class = "btn btn-info ms-auto">Add Savings</a>
+                        </div>
+                        <table class = "table">
+                            <thead>
+                                <tr>
+                                    <th scope = "col">Name</th>
+                                    <th scope = "col">Amount</th>
+                                    <th scope = "col" class = "text text-warning">Savings Total: {{ saving_total }}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% if user_with_savings.savings %}
+                                    {% for saving in user_with_savings.savings %}
+                                        <tr>
+                                            <td scope = "row">{{ saving.name }}</td>
+                                            <td>{{ saving.amount }}</td>
+                                            <td><a href="/edit/savings/{{ saving.id }}" class = "text text-success-emphasis">Edit</a></td>
+                                            <td><a href="/delete/savings/{{ saving.id }}" class = "text text-danger">Delete</a></td>
+                                        </tr>
+                                    {% endfor %}
+                                {% endif %}
+                            </tbody>
+                        </table>
+
+                        <!-- div class used for spacing on bottom of page -->
+                        <div class = "p-5 mb-5 bg-dark-subtle text-emphasis-dark">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+    </html>
